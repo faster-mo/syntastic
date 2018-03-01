@@ -185,8 +185,8 @@ function! g:SyntasticChecker.makeprgBuild(opts) abort " {{{2
     call extend(parts, self._getOpt(a:opts, basename, 'fname', syntastic#util#shexpand('%')))
     call extend(parts, self._getOpt(a:opts, basename, 'post_args', ''))
     call extend(parts, self._getOpt(a:opts, basename, 'tail', ''))
-
-    return join(parts)
+    let makeprg = join(parts)
+    return {'makeprg': makeprg, 'asyncStep': self._asyncStep}
 endfunction " }}}2
 
 function! g:SyntasticChecker.isAvailable() abort " {{{2
