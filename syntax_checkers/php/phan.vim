@@ -32,8 +32,11 @@ endfunction
 
 function! SyntaxCheckers_php_phan_GetLocList() dict
 
-    let a:args = "-k ".g:phpqa_phan_config
-    " let a:args = "-l . -k ".g:phpqa_phan_config." --include-analysis-file-list "
+    let a:args = ""
+    if len(glob(g:phpqa_phan_config))>0
+        let a:args = "-k ".g:phpqa_phan_config
+        " let a:args = "-l . -k ".g:phpqa_phan_config." --include-analysis-file-list "
+    endif
 
     let makeprg = self.makeprgBuild({
                 \ 'args': a:args })
