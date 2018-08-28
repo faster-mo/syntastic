@@ -64,17 +64,18 @@ function! syntastic#util#system(command, ...) abort " {{{2
             let g:{outKey} = []
             let job_opt = {}
             let job_opt.out_io = 'pipe'
+            let job_opt.out_mode = 'nl'
             let job_opt.in_io = 'null'
             let job_opt.err_io = 'pipe'
             let job_opt.err_mode = 'raw'
             let job_opt.timeout = 50000
             let job_opt.err_timeout = 50000
-            let job_opt.out_cb = function({key, job, message -> execute("
+            let job_opt.out_cb = function({key, channel, message -> execute("
                         \ if strlen(message)>0|
                         \     let g:{key} += [message]|
                         \ endif|
                         \ ", "silent")}, [outKey])
-            let job_opt.err_cb = {job, message -> execute("echom ".string(message), "")}
+            let job_opt.err_cb = {channel, message -> execute("echom ".string(message), "")}
 
             if l:asyncStep==2
                 let job_opt.exit_cb = {job, status -> SyntasticCheck(3)}
@@ -84,7 +85,7 @@ function! syntastic#util#system(command, ...) abort " {{{2
 
             let job_command = [&shell, &shellcmdflag]
             let job_command += [command]
-            let g:{syntasticJob} = job_start(job_command, job_opt)
+            let g:{syntasticJob} = job_start(join(job_command), job_opt)
             if job_status(g:{syntasticJob})=='fail'
                 throw 'job start fail'
             endif
