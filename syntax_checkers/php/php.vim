@@ -25,8 +25,8 @@ endfunction
 
 function! SyntaxCheckers_php_php_GetLocList() dict
     let makeprg = self.makeprgBuild({
-        \ 'args': '-d error_reporting=E_ALL',
-        \ 'args_after': '-l -d error_log= -d display_errors=1 -d log_errors=0 -d xdebug.cli_color=0' })
+        \ 'args': '-d error_reporting=E_ALL -d error_log= -d display_errors=1 -d log_errors=0 -d xdebug.cli_color=0',
+        \ 'args_after': '-l -f'})
 
     let errorformat =
         \ '%-GNo syntax errors detected in%.%#,'.
