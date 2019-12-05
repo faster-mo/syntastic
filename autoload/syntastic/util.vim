@@ -75,7 +75,7 @@ function! syntastic#util#system(command, ...) abort " {{{2
                         \     let g:{key} += [message]|
                         \ endif|
                         \ ", "silent")}, [outKey])
-            let job_opt.err_cb = {channel, message -> execute("echom ".string(message), "")}
+            let job_opt.err_cb = {channel, message -> execute("echom ".substitute(substitute(string(message), nr2char(10), "", "g"), nr2char(13), "", "g"), "")}
 
             if l:asyncStep==2
                 let job_opt.exit_cb = {job, status -> SyntasticCheck(3)}

@@ -34,7 +34,7 @@ function! SyntaxCheckers_php_phan_GetLocList() dict
 
     let a:args = ""
     if len(glob(g:phpqa_phan_config))>0
-        let a:args = "-k ".g:phpqa_phan_config. " --no-progress-bar"
+        let a:args = "-k ".g:phpqa_phan_config. " --progress-bar"
         " let a:args = "-l . -k ".g:phpqa_phan_config." --include-analysis-file-list "
     endif
 
