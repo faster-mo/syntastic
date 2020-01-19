@@ -32,14 +32,15 @@ endfunction
 
 function! SyntaxCheckers_php_phan_GetLocList() dict
 
-    let a:args = ""
+    let args = ""
     if len(glob(g:phpqa_phan_config))>0
-        let a:args = "-k ".g:phpqa_phan_config. " --progress-bar"
-        " let a:args = "-l . -k ".g:phpqa_phan_config." --include-analysis-file-list "
+        let args = "-k ".g:phpqa_phan_config. " --no-progress-bar"
+        " let args = "-l . -k ".g:phpqa_phan_config." --include-analysis-file-list "
     endif
 
     let makeprg = self.makeprgBuild({
-                \ 'args': a:args })
+                \ 'args': args })
+
     let errorformat = '%f:%l\ Phan%m'
     let env = { }
     return SyntasticMake({
@@ -50,8 +51,7 @@ endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
             \ 'filetype': 'php',
-            \ 'name': 'phan',
-            \ 'exec': 'phan' })
+            \ 'name': 'phan'})
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

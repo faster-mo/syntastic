@@ -85,7 +85,8 @@ function! syntastic#util#system(command, ...) abort " {{{2
 
             let job_command = [&shell, &shellcmdflag]
             let job_command += [command]
-            let g:{syntasticJob} = job_start(join(job_command), job_opt)
+            " echom join(job_command)
+            let g:{syntasticJob} = job_start(command, job_opt)
             if job_status(g:{syntasticJob})=='fail'
                 throw 'job start fail'
             endif
