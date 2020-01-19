@@ -39,7 +39,8 @@ function! SyntaxCheckers_php_phan_GetLocList() dict
     endif
 
     let makeprg = self.makeprgBuild({
-                \ 'args': a:args })
+                \ 'args': args })
+
     let errorformat = '%f:%l\ Phan%m'
     let env = { }
     return SyntasticMake({
@@ -50,8 +51,7 @@ endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
             \ 'filetype': 'php',
-            \ 'name': 'phan',
-            \ 'exec': 'phan' })
+            \ 'name': 'phan'})
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
