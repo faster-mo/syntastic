@@ -31,7 +31,6 @@ function! SyntaxCheckers_php_phan_GetHighlightRegex(item)
 endfunction
 
 function! SyntaxCheckers_php_phan_GetLocList() dict
-
     let args = ""
     if len(glob(g:phpqa_phan_config))>0
         let args = "-k ".g:phpqa_phan_config. " --no-progress-bar -I"
